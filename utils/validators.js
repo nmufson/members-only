@@ -1,3 +1,6 @@
+const { body, validationResult } = require('express-validator');
+const db = require('../db/queries');
+
 const userValidationRules = () => [
   body('firstName').trim().notEmpty().withMessage('First name is required'),
   body('lastName').trim().notEmpty().withMessage('Last name is required'),

@@ -4,14 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
-    <link rel="stylesheet" href="/main.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
   </head>
   <body>
     <%- include('partials/header') %>
 
     <!-- express-ejs-layouts auto injects the content from view into body variable -->
     <main><%- body %></main>
-
-    <%- include('partials/footer') %>
+    <%- include('partials/modal') %> <%- include('partials/footer') %>
+    <script src="/scripts/main.js" type="module"></script>
   </body>
 </html>

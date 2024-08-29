@@ -1,0 +1,27 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  display: none; /* Hidden by default */
+  z-index: 1040; /* Behind the modal */
+}
+
+/* Styles for the modal */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1050; /* On top of the backdrop */
+  border: 2px black solid;
+}
+
+/* Show the modal and backdrop */
+.modal.show,
+.modal-backdrop.show {
+  display: block;
+}

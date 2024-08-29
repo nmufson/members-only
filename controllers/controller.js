@@ -1,7 +1,7 @@
 const db = require('../db/queries');
 const bcrypt = require('bcryptjs');
 const catchAsync = require('../utils/catchAsync');
-const userValidationRules = require('../utils/validators/');
+const userValidationRules = require('../utils/validators');
 const { body, validationResult } = require('express-validator');
 
 async function getHomePage(req, res) {
@@ -11,6 +11,16 @@ async function getHomePage(req, res) {
 async function getSignUpPage(req, res) {
   res.render('sign-up', { title: 'Sign Up Page' });
 }
+
+async function getMemberJoinPage(req, res) {
+  res.render('member-join', { title: 'Join as Member' });
+}
+
+async function getLogInPage(req, res) {
+  res.render('log-in', { title: 'Log In Page' });
+}
+
+async function postLogIn(req, res) {}
 
 async function postCreateUser(req, res, next) {
   // promise.all waits for validation to complete, validation.run returns promise
@@ -28,6 +38,45 @@ async function postCreateUser(req, res, next) {
   const hashedPassword = await bcrypt.hash(password, 10);
 
   await db.createUser(firstName, lastName, email, hashedPassword);
+  const user = await db.getUserByEmail(email);
+  if (!user) return res.status(500).send('Error: User could not be created');
+
+  // Wrap req.login in a Promise so it can be used with async/await
+  await new Promise((resolve, reject) => {
+    req.login(user, (err) => {
+      if (err) {
+        return reject(err); // Pass any errors to the catchAsync utility
+      }
+      resolve(); // Successfully logged in
+    });
+  });
+
+  res.redirect('/');
+}
+
+async function postJoinClub(req, res) {
+  if (req.body.memberPassword === process.env.MEMBER_PASSWORD) {
+    await db.makeMember(req.user.id);
+    res.render('member-congrats', { title: 'Member Congrats' });
+    // render a page or modal saying 'ur now a member'
+    // then allow the user to return to home page
+    // show their name somewhere in the corner with an indication that
+    // they are a member
+  } else {
+    res.status(403).send('Incorrect member password'); // Handle incorrect member password
+  }
+}
+
+async function logOut(req, res) {
+  await new Promise((resolve, reject) => {
+    req.logout((err) => {
+      if (err) {
+        return reject(err); // Reject the promise if an error occurs
+      }
+      resolve(); // Resolve the promise if logout is successful
+    });
+  });
+
   res.redirect('/');
 }
 
@@ -35,4 +84,9 @@ module.exports = {
   getHomePage: catchAsync(getHomePage),
   getSignUpPage: catchAsync(getSignUpPage),
   postCreateUser: catchAsync(postCreateUser),
+  getMemberJoinPage: catchAsync(getMemberJoinPage),
+  postJoinClub: catchAsync(postJoinClub),
+  logOut: catchAsync(logOut),
+  getLogInPage: catchAsync(getLogInPage),
+  postLogIn: catchAsync(postLogIn),
 };
