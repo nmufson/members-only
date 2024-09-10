@@ -11,6 +11,7 @@ router.get('/member-join', controller.getMemberJoinPage);
 router.post('/member-join', checkAuthenticated, controller.postJoinClub);
 
 router.get('/log-in', controller.getLogInPage);
+router.post('/log-in', controller.postLogIn);
 
 router.post('/log-out', checkAuthenticated, controller.logOut);
 

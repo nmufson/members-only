@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const catchAsync = require('../utils/catchAsync');
 const userValidationRules = require('../utils/validators');
 const { body, validationResult } = require('express-validator');
+const passport = require('passport');
 
 async function getHomePage(req, res) {
   res.render('index', { title: 'Home Page' });
@@ -17,10 +18,35 @@ async function getMemberJoinPage(req, res) {
 }
 
 async function getLogInPage(req, res) {
-  res.render('log-in', { title: 'Log In Page' });
+  const messages = req.session.messages || [];
+  res.render('log-in', { title: 'Log In Page', messages });
 }
 
-async function postLogIn(req, res) {}
+async function postLogIn(req, res, next) {
+  // Use Passport's local strategy to authenticate the user
+  passport.authenticate('local', async (err, user, info) => {
+    if (err) {
+      return next(err); // If there's an error, pass it to the error handler
+    }
+    if (!user) {
+      // Authentication failed
+      // Store the error message in the session
+      req.session.messages = [info.message];
+      return res.redirect('/log-in');
+    }
+
+    // If authentication is successful, log in the user
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect('/');
+    });
+
+    // Redirect to the home page or the user's dashboard after successful login
+    res.redirect('/');
+  })(req, res, next); // Pass req, res, and next to passport.authenticate
+}
 
 async function postCreateUser(req, res, next) {
   // promise.all waits for validation to complete, validation.run returns promise
@@ -42,13 +68,11 @@ async function postCreateUser(req, res, next) {
   if (!user) return res.status(500).send('Error: User could not be created');
 
   // Wrap req.login in a Promise so it can be used with async/await
-  await new Promise((resolve, reject) => {
-    req.login(user, (err) => {
-      if (err) {
-        return reject(err); // Pass any errors to the catchAsync utility
-      }
-      resolve(); // Successfully logged in
-    });
+  req.login(user, (err) => {
+    if (err) {
+      return reject(err); // Pass any errors to the catchAsync utility
+    }
+    resolve(); // Successfully logged in
   });
 
   res.redirect('/');

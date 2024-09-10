@@ -9,16 +9,21 @@
       <div><a href="/">Home</a></div>
       <% } else { %>
       <!-- User is logged in -->
-      <div>Welcome, <%= user.firstName %>!</div>
+      <div><h2>Welcome, <%= user.first_name %>!</h2></div>
       <% if (user.membership_status) { %>
       <!-- User is a member -->
-      <div><a href="/">Member Home</a></div>
-      <% } else { %>
-      <!-- User is logged in but not a member -->
-      <div><a href="/">Home</a></div>
-      <div><a href="/member-join">Join Club</a></div>
-      <% } %>
-      <div><button id="openLogOutModalButton">Log Out</button></div>
+
+      <div>
+        <div><a href="/">Member Home</a></div>
+        <% } else { %>
+        <div>
+          <!-- User is logged in but not a member -->
+          <div><a href="/">Home</a></div>
+          <div><a href="/member-join">Join Club</a></div>
+          <% } %>
+          <div><button id="openLogOutModalButton">Log Out</button></div>
+        </div>
+      </div>
       <% } %>
     </nav>
   </div>

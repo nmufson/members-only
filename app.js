@@ -21,6 +21,9 @@ const sessionStore = new pgSession({
   tableName: 'session',
 });
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(
   //config object for the express-session middleware
   session({
@@ -57,20 +60,28 @@ passport.deserializeUser(async (id, done) => {
 });
 
 passport.use(
-  new LocalStrategy(async (email, password, done) => {
-    try {
-      const user = await db.getUserByUsername(email);
-      if (!user) return done(null, false, { message: 'Incorrect email.' });
+  new LocalStrategy(
+    //Passport LocaclStrat looks for 'username' and 'password' by default
+    // need to specify if our form uses other name like 'email'
+    { usernameField: 'email', passwordField: 'password' },
+    async (email, password, done) => {
+      console.log('okkk');
+      try {
+        const user = await db.getUserByEmail(email);
+        console.log('Retrieved user:', user); // Debug statement
+        if (!user) return done(null, false, { message: 'Incorrect email.' });
 
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-      if (!isPasswordValid)
-        return done(null, false, { message: 'Incorrect password.' });
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        console.log('Password match result:', isPasswordValid); // Debug statement
+        if (!isPasswordValid)
+          return done(null, false, { message: 'Incorrect password.' });
 
-      return done(null, user);
-    } catch (err) {
-      return done(err);
+        return done(null, user);
+      } catch (err) {
+        return done(err);
+      }
     }
-  })
+  )
 );
 
 app.use(setLocalsMiddleware);
@@ -79,8 +90,6 @@ app.use(logSessionMiddleware);
 
 // static files, parsing
 app.use(express.static('public'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 // sets the view engine
 app.set('view engine', 'ejs');

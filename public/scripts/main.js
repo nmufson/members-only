@@ -1,7 +1,9 @@
 import { openModal, closeModal } from './modal.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const openLogOutModalButton = document.querySelector('#openLogOutModal');
+  const openLogOutModalButton = document.querySelector(
+    '#openLogOutModalButton'
+  );
 
   if (openLogOutModalButton) {
     openLogOutModalButton.addEventListener('click', openModal);
