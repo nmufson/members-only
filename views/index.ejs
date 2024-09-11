@@ -1,3 +1,35 @@
 <div>
-  <p>this is the home page where the messages will go</p>
+  <div>
+    <form action="/send-message" method="POST">
+      <fieldset>
+        <legend>Send New Message</legend>
+
+        <div>
+          <textarea
+            name="message"
+            placeholder="Write your message here..."
+          ></textarea>
+        </div>
+
+        <button type="submit">Submit</button>
+      </fieldset>
+    </form>
+  </div>
+
+  <div>
+    <h2>Messages</h2>
+    <% if (messages && messages.length > 0) { %>
+    <ul>
+      <% messages.forEach(message => { %>
+      <li>
+        <strong><%= message.user_first_name %>:</strong> <%=
+        message.message_content %>
+        <small><%= new Date(message.timestamp).toLocaleString() %></small>
+      </li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+    <p>No messages yet.</p>
+    <% } %>
+  </div>
 </div>

@@ -45,9 +45,42 @@ async function makeMember(userId) {
   });
 }
 
+async function newMessage(userId, message) {
+  const query = `
+  INSERT INTO messages (user_id, message_content, timestamp)
+  VALUES ($1, $2, NOW());
+  
+  `;
+  const values = [userId, message];
+
+  return catchQuery(async () => {
+    const result = await pool.query(query, values);
+    console.log('Message created successfully:', result.rows[0]);
+    return result.rows[0];
+  });
+}
+
+// caching messages? so that it only has to query new ones?
+async function getAllMessages() {
+  const query = `
+    SELECT message_content, timestamp, users.first_name, users.last_name
+    FROM messages
+    JOIN users ON messages.user_id = users.id
+    ORDER BY messages.timestamp DESC
+  `;
+
+  return catchQuery(async () => {
+    const result = await pool.query(query);
+    console.log('Messages retrieved successfully:', result.rows);
+    return result.rows;
+  });
+}
+
 module.exports = {
   getUserByEmail,
   getUserById,
   createUser,
   makeMember,
+  newMessage,
+  getAllMessages,
 };

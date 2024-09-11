@@ -35,4 +35,13 @@ const userValidationRules = () => [
   }),
 ];
 
-module.exports = userValidationRules;
+const messageValidationRules = () => [
+  body('message')
+    .trim()
+    .notEmpty()
+    .withMessage('Message cannot be empty')
+    .isLength({ max: 250 })
+    .withMessage('Message cannot be longer than 500 characters'),
+];
+
+module.exports = { userValidationRules, messageValidationRules };

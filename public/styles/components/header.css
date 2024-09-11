@@ -16,14 +16,26 @@ nav {
   flex-direction: column;
 }
 
-nav div {
-  align-self: center;
-}
-
-nav > div:nth-child(2) {
-  width: 100%;
+#notLoggedInHeaderDiv {
   display: flex;
   justify-content: center;
+}
+
+#loggedInHeaderDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#loggedInAndMemberHeaderDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#loggedInHeaderDiv > div:nth-child(2),
+#loggedInAndMemberHeaderDiv > div:nth-child(2) {
+  display: flex;
 }
 
 nav div a,
@@ -39,4 +51,5 @@ nav div button {
   text-align: center;
   transition: background-color 0.3s ease;
   border: 1px solid black;
+  width: 100px;
 }

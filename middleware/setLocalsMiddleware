@@ -1,8 +1,17 @@
-function setLocalsMiddleware(req, res, next) {
+const db = require('../db/queries');
+
+function setLocalsUser(req, res, next) {
   console.log(req.user);
   res.locals.user = req.user;
 
   next();
 }
 
-module.exports = setLocalsMiddleware;
+async function setLocalsMessages(req, res, next) {
+  const messages = await db.getAllMessages();
+  res.locals.messages = messages;
+
+  next();
+}
+
+module.exports = { setLocalsUser, setLocalsMessages };

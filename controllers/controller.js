@@ -1,7 +1,10 @@
 const db = require('../db/queries');
 const bcrypt = require('bcryptjs');
 const catchAsync = require('../utils/catchAsync');
-const userValidationRules = require('../utils/validators');
+const {
+  userValidationRules,
+  messageValidationRules,
+} = require('../utils/validators');
 const { body, validationResult } = require('express-validator');
 const passport = require('passport');
 
@@ -44,7 +47,6 @@ async function postLogIn(req, res, next) {
     });
 
     // Redirect to the home page or the user's dashboard after successful login
-    res.redirect('/');
   })(req, res, next); // Pass req, res, and next to passport.authenticate
 }
 
@@ -68,11 +70,13 @@ async function postCreateUser(req, res, next) {
   if (!user) return res.status(500).send('Error: User could not be created');
 
   // Wrap req.login in a Promise so it can be used with async/await
-  req.login(user, (err) => {
-    if (err) {
-      return reject(err); // Pass any errors to the catchAsync utility
-    }
-    resolve(); // Successfully logged in
+  await new Promise((resolve, reject) => {
+    req.login(user, (err) => {
+      if (err) {
+        return reject(err); // Pass any errors to the catchAsync utility
+      }
+      resolve(); // Successfully logged in
+    });
   });
 
   res.redirect('/');
@@ -104,6 +108,19 @@ async function logOut(req, res) {
   res.redirect('/');
 }
 
+async function sendMessage(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
+  const { message } = req.body;
+  const userId = req.user.id;
+
+  await db.newMessage(userId, message);
+  res.redirect('/');
+}
+
 module.exports = {
   getHomePage: catchAsync(getHomePage),
   getSignUpPage: catchAsync(getSignUpPage),
@@ -113,4 +130,5 @@ module.exports = {
   logOut: catchAsync(logOut),
   getLogInPage: catchAsync(getLogInPage),
   postLogIn: catchAsync(postLogIn),
+  sendMessage: catchAsync(sendMessage),
 };
