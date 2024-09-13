@@ -44,4 +44,9 @@ const messageValidationRules = () => [
     .withMessage('Message cannot be longer than 500 characters'),
 ];
 
-module.exports = { userValidationRules, messageValidationRules };
+const getError = (errors, field) => {
+  const error = errors.find((err) => err.path === field);
+  return error ? error.msg : null;
+};
+
+module.exports = { userValidationRules, messageValidationRules, getError };

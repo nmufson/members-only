@@ -3,11 +3,9 @@ const catchQuery = require('../utils/catchQuery');
 
 async function getUserByEmail(email) {
   const query = `SELECT * FROM users WHERE email = $1;`;
-  console.log('yo');
 
   return catchQuery(async () => {
     const result = await pool.query(query, [email]);
-    console.log('yoo');
     return result.rows[0]; // Returns the first matching user
   });
 }

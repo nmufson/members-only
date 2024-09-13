@@ -65,13 +65,15 @@ passport.use(
     // need to specify if our form uses other name like 'email'
     { usernameField: 'email', passwordField: 'password' },
     async (email, password, done) => {
-      console.log('okkk');
       try {
         const user = await db.getUserByEmail(email);
         console.log('Retrieved user:', user); // Debug statement
         if (!user) return done(null, false, { message: 'Incorrect email.' });
 
+        console.log(password, user.password);
+        // user.password is the hashed pw
         const isPasswordValid = await bcrypt.compare(password, user.password);
+        console.log(isPasswordValid);
         console.log('Password match result:', isPasswordValid); // Debug statement
         if (!isPasswordValid)
           return done(null, false, { message: 'Incorrect password.' });
@@ -86,7 +88,7 @@ passport.use(
 
 app.use(setLocalsMiddleware.setLocalsUser);
 
-app.use(logSessionMiddleware);
+// app.use(logSessionMiddleware);
 
 // static files, parsing
 app.use(express.static('public'));

@@ -4,6 +4,7 @@ const catchAsync = require('../utils/catchAsync');
 const {
   userValidationRules,
   messageValidationRules,
+  getError,
 } = require('../utils/validators');
 const { body, validationResult } = require('express-validator');
 const passport = require('passport');
@@ -13,7 +14,12 @@ async function getHomePage(req, res) {
 }
 
 async function getSignUpPage(req, res) {
-  res.render('sign-up', { title: 'Sign Up Page' });
+  res.render('sign-up', {
+    title: 'Sign Up Page',
+    errors: [],
+    data: {},
+    getError: getError,
+  });
 }
 
 async function getMemberJoinPage(req, res) {
@@ -22,7 +28,8 @@ async function getMemberJoinPage(req, res) {
 
 async function getLogInPage(req, res) {
   const messages = req.session.messages || [];
-  res.render('log-in', { title: 'Log In Page', messages });
+  const email = req.query.email || '';
+  res.render('log-in', { title: 'Log In Page', messages, email });
 }
 
 async function postLogIn(req, res, next) {
@@ -33,9 +40,11 @@ async function postLogIn(req, res, next) {
     }
     if (!user) {
       // Authentication failed
-      // Store the error message in the session
+      // Store the error message in the session (can pull from session in ejs)
       req.session.messages = [info.message];
-      return res.redirect('/log-in');
+      return res.redirect(
+        '/log-in?email=' + encodeURIComponent(req.body.email)
+      );
     }
 
     // If authentication is successful, log in the user
@@ -58,8 +67,14 @@ async function postCreateUser(req, res, next) {
   );
 
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    return res.render('sign-up', {
+      title: 'Sign Up Page',
+      errors: errors.array(),
+      data: req.body, // retains user data
+      getError: getError,
+    });
   }
 
   const { firstName, lastName, email, password } = req.body;

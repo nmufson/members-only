@@ -1,7 +1,6 @@
 const db = require('../db/queries');
 
 function setLocalsUser(req, res, next) {
-  console.log(req.user);
   res.locals.user = req.user;
 
   next();

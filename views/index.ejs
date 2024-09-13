@@ -1,5 +1,6 @@
-<div>
-  <div>
+
+<div class="<%= user && user.membership_status ? '' : 'opaque' %>">
+  <div class="<%= user ? 'send-message-form-container' : 'send-message-form-container-disabled' %>">
     <form action="/send-message" method="POST">
       <fieldset>
         <legend>Send New Message</legend>
@@ -8,28 +9,43 @@
           <textarea
             name="message"
             placeholder="Write your message here..."
-          ></textarea>
+            <%= user ? '' : 'disabled' %>>
+          </textarea>
         </div>
 
-        <button type="submit">Submit</button>
+        <button type="submit" <%= user ? '' : 'disabled' %> >Submit</button>
       </fieldset>
     </form>
   </div>
 
+
+  <% if (user && user.membership_status) { %>
+    <div><%= user.membership_status %></div>
+  <% } %>
+
+
   <div>
     <h2>Messages</h2>
-    <% if (messages && messages.length > 0) { %>
-    <ul>
-      <% messages.forEach(message => { %>
-      <li>
-        <strong><%= message.user_first_name %>:</strong> <%=
-        message.message_content %>
-        <small><%= new Date(message.timestamp).toLocaleString() %></small>
-      </li>
-      <% }) %>
-    </ul>
-    <% } else { %>
-    <p>No messages yet.</p>
-    <% } %>
+    <div>
+      <ul class="<%= user ? '' : 'hidden-messages' %>">
+        <% if (messages && messages.length > 0) { %>
+        <% messages.forEach(message => { %>
+          <li>
+            <div>
+              <div>
+                <strong><%= message.first_name %> <%= message.last_name %>:</strong>
+              </div>
+              <div>
+                <small><%= new Date(message.timestamp).toLocaleString() %></small>
+              </div>
+            </div>
+            <div><p><%= message.message_content %></p></div>
+          </li>
+        <% }) %>
+        <% } else { %>
+        <p>No messages yet.</p>
+        <% } %>
+      </ul>
+    </div>
   </div>
 </div>

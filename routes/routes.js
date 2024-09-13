@@ -12,8 +12,8 @@ router.get('/', setLocalsMessages, controller.getHomePage);
 router.get('/sign-up', controller.getSignUpPage);
 router.post(
   '/sign-up',
-  setLocalsMessages,
   userValidationRules(),
+  setLocalsMessages,
   controller.postCreateUser
 );
 
