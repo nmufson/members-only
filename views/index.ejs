@@ -1,6 +1,11 @@
 
-<div class="<%= user && user.membership_status ? '' : 'opaque' %>">
-  <div class="<%= user ? 'send-message-form-container' : 'send-message-form-container-disabled' %>">
+
+  <div class="<%= user && user.membership_status ? 'send-message-form-container' : 'send-message-form-container disabled' %>">
+    <% if (!user || !user.membership_status) { %>
+    <div class="form-overlay">
+      <p>You need to be a member to send a message.</p>
+    </div>
+    <% } %>
     <form action="/send-message" method="POST">
       <fieldset>
         <legend>Send New Message</legend>
@@ -12,19 +17,12 @@
             <%= user ? '' : 'disabled' %>>
           </textarea>
         </div>
-
-        <button type="submit" <%= user ? '' : 'disabled' %> >Submit</button>
+        <button type="submit" <%= user ? '' : 'disabled' %>>Submit</button>
       </fieldset>
     </form>
   </div>
 
-
-  <% if (user && user.membership_status) { %>
-    <div><%= user.membership_status %></div>
-  <% } %>
-
-
-  <div>
+  <div class="messages-container">
     <h2>Messages</h2>
     <div>
       <ul class="<%= user ? '' : 'hidden-messages' %>">
@@ -32,14 +30,29 @@
         <% messages.forEach(message => { %>
           <li>
             <div>
-              <div>
-                <strong><%= message.first_name %> <%= message.last_name %>:</strong>
+              <div class="topMessageDiv">
+                <div>
+                  <strong><%= message.first_name %> <%= message.last_name %></strong>
+                </div>
+                <div class="deleteMessageDiv">
+                  <!-- <img src="/icons/delete.svg" alt="Delete Icon"> -->
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="delete-icon">
+                    <title>delete</title>
+                    <path d="M18,19C18,20.66 16.66,22 15,22H8C6.34,22 5,20.66 5,19V7H4V4H8.5L9.5,3H13.5L14.5,4H19V7H18V19M6,7V19C6,20.1 6.9,21 8,21H15C16.1,21 17,20.1 17,19V7H6M18,6V5H14L13,4H10L9,5H5V6H18M8,9H9V19H8V9M14,9H15V19H14V9Z" />
+                  </svg>
+                </div>
               </div>
-              <div>
-                <small><%= new Date(message.timestamp).toLocaleString() %></small>
+              <div class="midMessageDiv"><p><%= message.message_content %></p></div>
+              <div class="bottomMessageDiv">
+                <%
+                  const date = new Date(message.timestamp);
+                  const time = date.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'UTC' });
+                  const dateStr = date.toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'UTC' });
+                %>
+                <small><%= time %> - <%= dateStr %></small>
               </div>
             </div>
-            <div><p><%= message.message_content %></p></div>
+            
           </li>
         <% }) %>
         <% } else { %>
@@ -48,4 +61,4 @@
       </ul>
     </div>
   </div>
-</div>
+

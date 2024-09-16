@@ -1,34 +1,32 @@
 <header>
   <div><h1>Members Only</h1></div>
   <div>
-    <nav>
-      <% if (!user) { %>
-      <!-- User is not logged in -->
-      <div id="notLoggedInHeaderDiv">
-        <div><a href="/log-in">Log In</a></div>
-        <div><a href="/sign-up">Sign Up</a></div>
-        <div><a href="/">Home</a></div>
-      </div>
-      <% } else if (user && !user.membership_status) { %>
-      <!-- User is logged in but not a member -->
-      <div id="loggedInHeaderDiv">
-        <div><h2>Welcome, <%= user.first_name %>!</h2></div>
-        <div>
-          <div><a href="/">Home</a></div>
-          <div><a href="/member-join">Join Club</a></div>
-          <div><button id="openLogOutModalButton">Log Out</button></div>
-        </div>
-      </div>
-      <% } else { %>
-      <!-- User is logged in and a member -->
-      <div id="loggedInAndMemberHeaderDiv">
-        <div><h2>Welcome, <%= user.first_name %>!</h2></div>
-        <div>
-          <div><a href="/">Member Home</a></div>
-          <div><button id="openLogOutModalButton">Log Out</button></div>
-        </div>
-      </div>
-      <% } %>
+    <% if (!user) { %>
+    <!-- User is not logged in -->
+    <nav id="notLoggedInHeaderNav">
+      <a href="/log-in" class="nav-item">Log In</a>
+      <a href="/sign-up" class="nav-item">Sign Up</a>
+      <a href="/" class="nav-item">Home</a>
     </nav>
+    <% } else if (user && !user.membership_status) { %>
+    <!-- User is logged in but not a member -->
+    <div id="loggedInHeaderDiv">
+      <h2>Welcome, <%= user.first_name %>!</h2>
+      <nav>
+        <a href="/" class="nav-item">Home</a>
+        <a href="/member-join" class="nav-item">Join Club</a>
+        <button id="openLogOutModalButton" class="nav-item">Log Out</button>
+      </nav>
+    </div>
+    <% } else { %>
+    <!-- User is logged in and a member -->
+    <div id="loggedInAndMemberHeaderDiv">
+      <h2>Welcome, <%= user.first_name %>!</h2>
+      <nav>
+        <a href="/" class="nav-item">Member Home</a>
+        <button id="openLogOutModalButton" class="nav-item">Log Out</button>
+      </nav>
+    </div>
+    <% } %>
   </div>
 </header>

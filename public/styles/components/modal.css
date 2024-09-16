@@ -18,10 +18,38 @@
   transform: translate(-50%, -50%);
   z-index: 1050; /* On top of the backdrop */
   border: 2px black solid;
+  background-color: var(--primary-dark-gray);
+  padding: 10px;
 }
 
 /* Show the modal and backdrop */
 .modal.show,
 .modal-backdrop.show {
   display: block;
+}
+
+.modal-header,
+.modal-footer {
+  display: flex;
+}
+
+.modal-header {
+  justify-content: space-between;
+}
+
+.modal h2 {
+  margin: 0;
+}
+
+.modal btn {
+  padding: 0;
+}
+
+.close-btn {
+  width: 30px;
+  height: 30px;
+}
+
+.action-btn {
+  height: 100%;
 }

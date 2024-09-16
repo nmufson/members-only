@@ -1,6 +1,16 @@
-.send-message-form-container-disabled {
+.send-message-form-container {
+  position: relative; /* So the overlay is contained within the form */
+  max-width: 600px; /* Control form width */
+  margin: 0 auto; /* Center the form */
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for a clean look */
+  background-color: #fff; /* Neutral background */
+}
+
+.send-message-form-container.disabled {
+  position: relative;
   pointer-events: none;
-  opacity: 0.5;
+  border-radius: 8px;
 }
 
 .hidden-messages {
@@ -9,4 +19,147 @@
 
 .hidden-messages p {
   filter: blur(3px);
+}
+
+.form-overlay,
+form {
+  max-height: 200px;
+}
+
+.form-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(
+    var(--secondary-mid-gray),
+    0.6
+  ); /* semi-transparent background */
+  color: var(--primary-dark-gray);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  z-index: 10; /* Ensure it sits above the form */
+  pointer-events: none; /* Prevent interaction with the overlay */
+}
+
+.form-overlay p {
+  margin: 0 0 20px 0;
+}
+
+form {
+  border-radius: 8px;
+}
+
+fieldset {
+  border: 1px solid #ddd; /* Light border for separation */
+  padding: 20px;
+  border-radius: 6px;
+  margin: 0 0 20px 0;
+}
+
+/* Legend styling */
+legend {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+/* Textarea styling */
+textarea {
+  width: 100%;
+  height: 75px;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 4px;
+  resize: vertical; /* Allow users to resize vertically */
+  box-sizing: border-box; /* Ensure padding is included in width/height */
+  font-family: inherit; /* Match the app's font */
+  transition: border-color 0.2s ease-in-out; /* Smooth interaction on focus */
+}
+
+textarea:focus {
+  outline: none;
+  border-color: #999; /* Highlight on focus */
+}
+
+/* Submit button styling */
+main button {
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out; /* Smooth transition on hover */
+}
+
+main button:hover {
+  background-color: #eaeaea; /* Slight background change on hover */
+}
+
+/* Disabled button styling */
+main button[disabled] {
+  cursor: not-allowed;
+  background-color: #ccc;
+}
+
+main > div {
+  margin: 0 5px 0 5px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.topMessageDiv {
+  display: flex;
+}
+
+ul > li:nth-child(even) {
+  margin-left: auto;
+}
+
+ul > li:nth-child(even) > div,
+ul > li:nth-child(odd) > div {
+  border-radius: 10px; /* Rounder message bubble */
+  padding: 5px;
+}
+
+ul > li:nth-child(even) > div {
+  background-color: black;
+}
+
+ul > li:nth-child(odd) > div {
+  background-color: var(--secondary-mid-gray);
+}
+
+li {
+  margin: 0 0 10px 0;
+  width: 90%;
+}
+
+li > div {
+  border: var(--accent-light-gray) 3px solid;
+  border-radius: 5px;
+  background-color: var(--secondary-mid-gray);
+}
+
+.topMessageDiv {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-icon {
+  width: 20px;
+  height: 20px;
+  fill: white;
 }

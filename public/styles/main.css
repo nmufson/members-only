@@ -4,3 +4,61 @@
 @import url('./pages/log-in.css');
 @import url('./pages/sign-up.css');
 @import url('./pages/index.css');
+
+/* For each palette, you can use the primary color for your background, 
+secondary colors for elements like headers, forms, and borders, 
+accent colors for subtle highlights or dividers, and action colors 
+for buttons or interactive elements to make them stand out.  */
+
+:root {
+  /* Primary Colors */
+  --primary-dark-gray: #2c2c2c;
+  --secondary-mid-gray: #4f4f4f;
+  --accent-light-gray: #e0e0e0;
+  --highlight-white: #ffffff;
+
+  /* Action/Highlight Color */
+  --action-electric-blue: #2979ff;
+}
+
+body {
+  background-color: var(--primary-dark-gray);
+  color: var(--highlight-white);
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Montserrat', sans-serif;
+}
+
+header,
+form {
+  background-color: var(--secondary-mid-gray);
+}
+
+p {
+  margin: 0;
+}
+
+.nav-item {
+  background-color: var(--secondary-mid-gray);
+  color: var(--highlight-white);
+}
+
+.nav-item:hover {
+  background-color: var(--action-electric-blue);
+  color: var(--highlight-white);
+}
+
+button {
+  background-color: var(--action-electric-blue);
+  color: var(--highlight-white);
+}
+
+button:disabled {
+  background-color: var(--accent-light-gray);
+  color: var(--secondary-mid-gray);
+}
