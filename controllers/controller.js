@@ -77,10 +77,11 @@ async function postCreateUser(req, res, next) {
     });
   }
 
-  const { firstName, lastName, email, password } = req.body;
+  const { firstName, lastName, email, password, adminCode } = req.body;
   const hashedPassword = await bcrypt.hash(password, 10);
+  const isAdmin = process.env.ADMIN_CODE === adminCode ? true : false;
 
-  await db.createUser(firstName, lastName, email, hashedPassword);
+  await db.createUser(firstName, lastName, email, hashedPassword, isAdmin);
   const user = await db.getUserByEmail(email);
   if (!user) return res.status(500).send('Error: User could not be created');
 
@@ -123,6 +124,12 @@ async function logOut(req, res) {
   res.redirect('/');
 }
 
+async function deleteMessage(req, res) {
+  db.deleteMessage(req.body.messageId);
+
+  res.redirect('/');
+}
+
 async function sendMessage(req, res) {
   //perhaps do some authenticating here??
   const errors = validationResult(req);
@@ -147,4 +154,5 @@ module.exports = {
   getLogInPage: catchAsync(getLogInPage),
   postLogIn: catchAsync(postLogIn),
   sendMessage: catchAsync(sendMessage),
+  deleteMessage: catchAsync(deleteMessage),
 };

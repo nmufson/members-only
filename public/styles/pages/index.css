@@ -11,56 +11,12 @@
   background-color: #fff; /* Neutral background */
 }
 
-.send-message-form-container.disabled {
-  position: relative;
-  pointer-events: none;
-  border-radius: 8px;
-}
-
-.hidden-messages {
-  opacity: 0.5;
-}
-
-.hidden-messages p {
-  filter: blur(3px);
-}
-
-.form-overlay,
-form {
-  max-height: 200px;
-}
-
-.form-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(
-    var(--secondary-mid-gray),
-    0.6
-  ); /* semi-transparent background */
-  color: var(--primary-dark-gray);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-align: center;
-  z-index: 10; /* Ensure it sits above the form */
-  pointer-events: none; /* Prevent interaction with the overlay */
-}
-
-.form-overlay p {
-  margin: 0 0 20px 0;
-}
-
 form {
   border-radius: 8px;
 }
 
 fieldset {
-  border: 1px solid #ddd; /* Light border for separation */
+  border: none;
   border-radius: 6px;
   margin: 0 0 20px 0;
 }
@@ -103,10 +59,6 @@ main button {
   transition: background-color 0.3s ease-in-out; /* Smooth transition on hover */
 }
 
-main button:hover {
-  background-color: #eaeaea; /* Slight background change on hover */
-}
-
 /* Disabled button styling */
 main button[disabled] {
   cursor: not-allowed;
@@ -129,7 +81,7 @@ ul {
 
 li {
   margin: 0 0 10px 0;
-  width: 90%;
+  width: clamp(250px, 70%, 400px);
 }
 
 ul > li > div {
@@ -138,20 +90,21 @@ ul > li > div {
   border: var(--accent-light-gray) 3px solid;
 }
 
-.other-message > div {
-  background-color: lightgreen;
+.message.basic strong,
+.message.basic small:nth-child(2) {
+  filter: blur(3px);
 }
 
-.own-message > div {
-  background-color: blue;
+.other > div {
+  background-color: var(--other-message);
 }
 
-.own-message {
+.self > div {
+  background-color: var(--user-message);
+}
+
+.self {
   margin-left: auto;
-}
-
-.basic-user-messages > li:nth-child(odd) > div {
-  background-color: var(--secondary-mid-gray);
 }
 
 .topMessageDiv {
@@ -160,7 +113,18 @@ ul > li > div {
 }
 
 .delete-icon {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   fill: white;
+  border: 2px solid transparent;
+  transition:
+    fill 0.3s,
+    transform 0.3s,
+    border-color 0.3s;
+}
+
+.delete-icon:hover {
+  fill: #d9534f; /* Change to a color of your choice on hover */
+  transform: scale(1.2); /* Slightly enlarge the icon on hover */
+  border-color: #d9534f;
 }

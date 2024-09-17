@@ -15,7 +15,6 @@ async function setLocalsMessages(req, res, next) {
     msg.formattedTime = time;
   });
   res.locals.messages = messages;
-  console.log(res.locals.messages);
 
   next();
 }

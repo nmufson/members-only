@@ -1,5 +1,5 @@
 function logSessionMiddleware(req, res, next) {
-  console.log('Current session data:', req.session);
+  // console.log('Current session data:', req.session);
   next();
 }
 

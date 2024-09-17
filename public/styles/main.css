@@ -11,20 +11,37 @@ accent colors for subtle highlights or dividers, and action colors
 for buttons or interactive elements to make them stand out.  */
 
 :root {
-  /* Primary Colors */
-  --primary-dark-gray: #2c2c2c;
-  --secondary-mid-gray: #4f4f4f;
-  --accent-light-gray: #e0e0e0;
-  --highlight-white: #ffffff;
+  /* Background */
+  --background-color: #f0f2f5; /* Light Gray Background */
+  --footer-background: #f8f9fa; /* Light Gray Footer */
 
-  /* Action/Highlight Color */
-  --action-electric-blue: #2979ff;
+  /* Text */
+  --text-dark: #333333; /* Very Dark Gray Text */
+  --text-light: #ffffff; /* White Text */
+  --footer-text: #6c757d; /* Medium Gray Footer Text */
+  --nav-bar-text: #ffffff; /* White Navigation Bar Text */
+
+  /* Messages */
+  --other-message: #e1e8ed; /* Light Blue Gray for Other Messages */
+  --user-message: #007bff; /* Bright Blue for User Messages */
+
+  /* Accent Colors */
+  --button-background: #007bff; /* Bright Blue Button Background */
+  --button-background-hover: #0056b3;
+  --button-background-active: #004080;
+  --button-text: #ffffff; /* White Button Text */
+  --border-color: #cccccc; /* Light Gray Border */
+
+  /* Additional */
+  --header-background: #007bff; /* Bright Blue Header Background */
+  --nav-bar-background: #343a40; /* Dark Gray Navigation Bar Background */
+  --nav-bar-hover: #495057; /* Lighter Dark Gray for Nav Bar Hover */
 }
 
 body {
-  background-color: var(--primary-dark-gray);
-  color: var(--highlight-white);
-  font-family: 'Open Sans', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-dark);
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
 }
 
@@ -36,34 +53,48 @@ main {
 h1,
 h2,
 h3 {
-  font-family: 'Montserrat', sans-serif;
+  color: var(--text-dark);
 }
 
-header,
+header {
+  background-color: var(--header-background);
+  color: var(--text-light);
+}
+
 form {
-  background-color: var(--secondary-mid-gray);
+  background-color: #e1e8ed;
+  border: 3px solid var(--border-color);
 }
 
 p {
   margin: 0;
 }
 
-.nav-item {
-  background-color: var(--secondary-mid-gray);
-  color: var(--highlight-white);
+nav {
+  background-color: var(--nav-bar-background);
+  color: var(--nav-bar-text);
 }
 
-.nav-item:hover {
-  background-color: var(--action-electric-blue);
-  color: var(--highlight-white);
+button,
+a.button {
+  background-color: var(--button-background);
+  color: var(--button-text);
 }
 
-button {
-  background-color: var(--action-electric-blue);
-  color: var(--highlight-white);
+button:hover,
+a.button:hover {
+  background-color: var(--button-background-hover);
 }
 
-button:disabled {
-  background-color: var(--accent-light-gray);
-  color: var(--secondary-mid-gray);
+button:active,
+a.button:active {
+  background-color: var(--button-background-active);
+}
+
+footer {
+  background-color: var(--footer-background);
+}
+
+.modal {
+  background-color: var(--background-color);
 }

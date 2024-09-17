@@ -1,4 +1,4 @@
-import { openModal, closeModal } from './modal.js';
+import { openModal, closeModal, showDeleteModal } from './modal.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const openLogOutModalButton = document.querySelector(
@@ -29,5 +29,15 @@ document.addEventListener('DOMContentLoaded', () => {
   closeFormButton.addEventListener('click', function () {
     formContainer.style.display = 'none';
     createMessageButton.style.display = 'block';
+  });
+
+  const deleteMessageIcons = document.querySelectorAll('.delete-icon');
+
+  deleteMessageIcons.forEach((icon) => {
+    icon.addEventListener('click', () => {
+      const messageId = icon.id;
+      console.log('type ish');
+      showDeleteModal(messageId);
+    });
   });
 });

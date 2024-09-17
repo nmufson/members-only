@@ -1,7 +1,8 @@
 const { Router } = require('express');
 const router = Router();
 const controller = require('../controllers/controller');
-const checkAuthenticated = require('../middleware/checkAuthenticated');
+const checkAuthenticated = require('../middleware/checkAuthenticated.js');
+const checkAdmin = require('../middleware/checkAdmin.js');
 const { setLocalsMessages } = require('../middleware/setLocalsMiddleware');
 const {
   userValidationRules,
@@ -37,5 +38,7 @@ router.post(
   controller.sendMessage,
   setLocalsMessages // this should go after the controller
 );
+
+router.post('/delete-message', checkAdmin, controller.deleteMessage);
 
 module.exports = router;

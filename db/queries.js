@@ -19,12 +19,12 @@ async function getUserById(id) {
   });
 }
 
-async function createUser(firstName, lastName, email, password) {
+async function createUser(firstName, lastName, email, password, isAdmin) {
   const query = `
-    INSERT INTO users (first_name, last_name, email, password)
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO users (first_name, last_name, email, password, is_admin)
+    VALUES ($1, $2, $3, $4, $5)
   `;
-  const values = [firstName, lastName, email, password];
+  const values = [firstName, lastName, email, password, isAdmin];
 
   return catchQuery(async () => {
     await pool.query(query, values);
@@ -61,7 +61,7 @@ async function newMessage(userId, message) {
 // caching messages? so that it only has to query new ones?
 async function getAllMessages() {
   const query = `
-    SELECT message_content, user_id, timestamp, users.first_name, users.last_name
+    SELECT messages.id AS message_id, message_content, user_id, timestamp, users.first_name, users.last_name
     FROM messages
     JOIN users ON messages.user_id = users.id
     ORDER BY messages.timestamp DESC
@@ -69,8 +69,23 @@ async function getAllMessages() {
 
   return catchQuery(async () => {
     const result = await pool.query(query);
-    console.log('Messages retrieved successfully:', result.rows);
+    // console.log('Messages retrieved successfully:', result.rows);
     return result.rows;
+  });
+}
+
+async function deleteMessage(id) {
+  const query = `
+  DELETE FROM messages
+  WHERE id = $1
+`;
+
+  const values = [id];
+
+  return catchQuery(async () => {
+    const result = await pool.query(query, values);
+    console.log('Message deleted successfully');
+    return result;
   });
 }
 
@@ -81,4 +96,5 @@ module.exports = {
   makeMember,
   newMessage,
   getAllMessages,
+  deleteMessage,
 };

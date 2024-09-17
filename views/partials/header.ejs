@@ -4,18 +4,18 @@
     <% if (!user) { %>
     <!-- User is not logged in -->
     <nav id="notLoggedInHeaderNav">
-      <a href="/log-in" class="nav-item">Log In</a>
-      <a href="/sign-up" class="nav-item">Sign Up</a>
-      <a href="/" class="nav-item">Home</a>
+      <a href="/log-in" class="button">Log In</a>
+      <a href="/sign-up" class="button">Sign Up</a>
+      <a href="/" class="button">Home</a>
     </nav>
     <% } else if (user && !user.membership_status) { %>
     <!-- User is logged in but not a member -->
     <div id="loggedInHeaderDiv">
       <h2>Welcome, <%= user.first_name %>!</h2>
       <nav>
-        <a href="/" class="nav-item">Home</a>
-        <a href="/member-join" class="nav-item">Join Club</a>
-        <button id="openLogOutModalButton" class="nav-item">Log Out</button>
+        <a href="/" class="button">Home</a>
+        <a href="/member-join" class="button">Join Club</a>
+        <button id="openLogOutModalButton">Log Out</button>
       </nav>
     </div>
     <% } else { %>
@@ -23,8 +23,8 @@
     <div id="loggedInAndMemberHeaderDiv">
       <h2>Welcome, <%= user.first_name %>!</h2>
       <nav>
-        <a href="/" class="nav-item">Member Home</a>
-        <button id="openLogOutModalButton" class="nav-item">Log Out</button>
+        <a href="/" class="button">Member Home</a>
+        <button id="openLogOutModalButton">Log Out</button>
       </nav>
     </div>
     <% } %>
