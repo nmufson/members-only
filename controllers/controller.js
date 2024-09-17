@@ -124,6 +124,7 @@ async function logOut(req, res) {
 }
 
 async function sendMessage(req, res) {
+  //perhaps do some authenticating here??
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });

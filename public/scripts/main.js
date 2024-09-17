@@ -16,4 +16,18 @@ document.addEventListener('DOMContentLoaded', () => {
   document
     .querySelector('#modalBackdrop')
     .addEventListener('click', closeModal);
+
+  const createMessageButton = document.querySelector('#create-message-btn');
+  const formContainer = document.getElementById('send-message-form-container');
+  const closeFormButton = document.getElementById('close-form-btn');
+
+  createMessageButton.addEventListener('click', () => {
+    formContainer.style.display = 'block';
+    createMessageButton.style.display = 'none';
+  });
+
+  closeFormButton.addEventListener('click', function () {
+    formContainer.style.display = 'none';
+    createMessageButton.style.display = 'block';
+  });
 });

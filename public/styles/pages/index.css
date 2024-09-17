@@ -1,3 +1,7 @@
+#create-message-btn-div {
+  align-self: center;
+}
+
 .send-message-form-container {
   position: relative; /* So the overlay is contained within the form */
   max-width: 600px; /* Control form width */
@@ -57,7 +61,6 @@ form {
 
 fieldset {
   border: 1px solid #ddd; /* Light border for separation */
-  padding: 20px;
   border-radius: 6px;
   margin: 0 0 20px 0;
 }
@@ -114,32 +117,14 @@ main > div {
   margin: 0 5px 0 5px;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
 .topMessageDiv {
   display: flex;
 }
 
-ul > li:nth-child(even) {
-  margin-left: auto;
-}
-
-ul > li:nth-child(even) > div,
-ul > li:nth-child(odd) > div {
-  border-radius: 10px; /* Rounder message bubble */
-  padding: 5px;
-}
-
-ul > li:nth-child(even) > div {
-  background-color: black;
-}
-
-ul > li:nth-child(odd) > div {
-  background-color: var(--secondary-mid-gray);
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 li {
@@ -147,9 +132,25 @@ li {
   width: 90%;
 }
 
-li > div {
+ul > li > div {
+  border-radius: 10px; /* Rounder message bubble */
+  padding: 5px;
   border: var(--accent-light-gray) 3px solid;
-  border-radius: 5px;
+}
+
+.other-message > div {
+  background-color: lightgreen;
+}
+
+.own-message > div {
+  background-color: blue;
+}
+
+.own-message {
+  margin-left: auto;
+}
+
+.basic-user-messages > li:nth-child(odd) > div {
   background-color: var(--secondary-mid-gray);
 }
 

@@ -28,6 +28,11 @@ body {
   margin: 0;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+}
+
 h1,
 h2,
 h3 {

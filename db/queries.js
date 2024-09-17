@@ -61,7 +61,7 @@ async function newMessage(userId, message) {
 // caching messages? so that it only has to query new ones?
 async function getAllMessages() {
   const query = `
-    SELECT message_content, timestamp, users.first_name, users.last_name
+    SELECT message_content, user_id, timestamp, users.first_name, users.last_name
     FROM messages
     JOIN users ON messages.user_id = users.id
     ORDER BY messages.timestamp DESC
