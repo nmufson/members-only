@@ -131,10 +131,10 @@ async function deleteMessage(req, res) {
 }
 
 async function sendMessage(req, res) {
-  //perhaps do some authenticating here??
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+    req.session.formErrors = errors.array();
+    return res.redirect('/');
   }
 
   const { message } = req.body;

@@ -19,4 +19,10 @@ async function setLocalsMessages(req, res, next) {
   next();
 }
 
-module.exports = { setLocalsUser, setLocalsMessages };
+async function setLocalsFormErrors(req, res, next) {
+  res.locals.formErrors = req.session.formErrors || [];
+  req.session.formErrors = []; // Reset formErrors after passing them to locals
+  next();
+}
+
+module.exports = { setLocalsUser, setLocalsMessages, setLocalsFormErrors };

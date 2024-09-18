@@ -1,7 +1,6 @@
 header {
   display: flex;
   flex-direction: column;
-  margin: 0 0 20px 0;
 }
 
 header > div {
@@ -9,9 +8,9 @@ header > div {
   justify-content: center;
 }
 
-h1,
-h2,
-h3 {
+header h1,
+header h2,
+header h3 {
   margin: 10px;
 }
 
@@ -39,25 +38,8 @@ nav {
   align-items: center;
 }
 
-button,
-a.button {
-  text-wrap: nowrap;
+header button,
+header a.button {
   margin: 0 10px 0 10px;
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  text-decoration: none; /* Remove underline from links */
-  border: 1px solid black;
-  border-radius: 5px;
-  background-color: transparent; /* Make button background match link */
-  color: #000; /* Set text color */
-  cursor: pointer; /* Make cursor pointer to indicate interaction */
-  text-align: center; /* Center text */
-  line-height: 1.5; /* Adjust line-height for vertical centering */
-  font-weight: bold; /* Remove any default bold text in buttons */
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease; /* Smooth transition for hover effect */
-  appearance: none; /* Remove default browser styles */
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
+
+  

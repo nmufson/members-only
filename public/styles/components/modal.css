@@ -21,21 +21,25 @@
   padding: 10px;
 }
 
-/* Show the modal and backdrop */
-.modal.show,
-.modal-backdrop.show {
-  display: block;
-}
-
 .modal h2 {
   margin: 0;
 }
 
-.modal-actions {
-  display: flex;
+.modal p {
+  margin: 20px 10px 20px 0;
 }
 
-#logoutForm {
+.modal-actions {
+  display: flex;
+  margin: 0 0 5px 0;
+}
+
+.modal-actions button {
+  margin: 0 10px 0 0;
+}
+
+#logoutForm,
+#deleteMessageForm {
   background-color: var(--background-color);
   border: none;
 }

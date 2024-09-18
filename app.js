@@ -87,6 +87,7 @@ passport.use(
 );
 
 app.use(setLocalsMiddleware.setLocalsUser);
+app.use(setLocalsMiddleware.setLocalsFormErrors);
 
 // app.use(logSessionMiddleware);
 

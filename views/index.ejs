@@ -1,4 +1,10 @@
-<div id="create-message-btn-div">
+<div
+  id="create-message-btn-div"
+  style="
+    <%=(formErrors && formErrors.length > 0)? 'display: none;' : 'display: block;'
+      %>;
+  "
+>
   <% if (user) { %>
   <button id="create-message-btn">Create Message</button>
   <% } else { %>
@@ -6,18 +12,39 @@
   <% } %>
 </div>
 
-<div id="send-message-form-container" style="display: none">
-  <form action="/send-message" method="POST">
+<div
+  id="send-message-form-container"
+  style="
+    <%=(formErrors && formErrors.length > 0)? 'display: block;' : 'display: none;'
+      %>;
+  "
+>
+  <form action="/send-message" id="send-message-form" method="POST">
     <fieldset>
       <legend>Send New Message</legend>
-      <div>
-        <textarea
-          name="message"
-          placeholder="Write your message here..."
-        ></textarea>
+
+      <!-- Display form validation errors if any -->
+      <% if (formErrors && formErrors.length > 0) { %>
+      <div class="error">
+        <ul>
+          <% formErrors.forEach(function(error) { %>
+          <li><%= error.msg %></li>
+          <% }); %>
+        </ul>
       </div>
-      <button id="close-form-btn" type="button">Close</button>
-      <button type="submit">Submit</button>
+      <% } %>
+
+      <!-- Message input field -->
+      <textarea
+        name="message"
+        placeholder="Write your message here..."
+        maxlength="250"
+      ></textarea>
+
+      <div class="form-actions">
+        <button id="close-form-btn" type="button">Close</button>
+        <button type="submit">Submit</button>
+      </div>
     </fieldset>
   </form>
 </div>
@@ -53,9 +80,7 @@
               </svg>
             </div>
           </div>
-          <div class="midMessageDiv">
-            <p><%= message.message_content %></p>
-          </div>
+          <p><%= message.message_content %></p>
           <div class="bottomMessageDiv">
             <small>Sent:</small>
             <small>

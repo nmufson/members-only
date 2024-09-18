@@ -14,6 +14,7 @@ for buttons or interactive elements to make them stand out.  */
   /* Background */
   --background-color: #f0f2f5; /* Light Gray Background */
   --footer-background: #f8f9fa; /* Light Gray Footer */
+  --body-background: #e1e5eb;
 
   /* Text */
   --text-dark: #333333; /* Very Dark Gray Text */
@@ -39,15 +40,21 @@ for buttons or interactive elements to make them stand out.  */
 }
 
 body {
-  background-color: var(--background-color);
+  background-color: var(--body-background);
   color: var(--text-dark);
   font-family: 'Montserrat', sans-serif;
   margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
+  background-color: var(--background-color);
   display: flex;
   flex-direction: column;
+  min-height: 500px;
+  max-width: 700px;
+  align-self: center;
 }
 
 h1,
@@ -79,6 +86,22 @@ button,
 a.button {
   background-color: var(--button-background);
   color: var(--button-text);
+  text-wrap: nowrap;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  text-decoration: none; /* Remove underline from links */
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer; /* Make cursor pointer to indicate interaction */
+  text-align: center; /* Center text */
+  line-height: 1.5; /* Adjust line-height for vertical centering */
+  font-weight: bold; /* Remove any default bold text in buttons */
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease; /* Smooth transition for hover effect */
+  appearance: none; /* Remove default browser styles */
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 button:hover,

@@ -1,18 +1,24 @@
-#create-message-btn-div {
+#create-message-btn-div,
+#send-message-form-container {
+  margin: 10px 0 0 0;
   align-self: center;
 }
 
-.send-message-form-container {
+#send-message-form-container {
   position: relative; /* So the overlay is contained within the form */
-  max-width: 600px; /* Control form width */
-  margin: 0 auto; /* Center the form */
+  width: clamp(300px, 70%, 600px);
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for a clean look */
   background-color: #fff; /* Neutral background */
 }
 
-form {
+#send-message-form {
   border-radius: 8px;
+  padding: 10px 0 0 0;
+}
+
+fieldset > div:nth-child(2) {
+  margin: 0 0 10px 0;
 }
 
 fieldset {
@@ -46,17 +52,13 @@ textarea:focus {
   border-color: #999; /* Highlight on focus */
 }
 
-/* Submit button styling */
-main button {
-  display: inline-block;
-  padding: 12px 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  text-align: center;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out; /* Smooth transition on hover */
+.form-actions {
+  display: flex;
+  margin: 5px 0 0 0;
+}
+
+.form-actions button {
+  margin: 0 10px 0 0;
 }
 
 /* Disabled button styling */
@@ -65,8 +67,27 @@ main button[disabled] {
   background-color: #ccc;
 }
 
-main > div {
-  margin: 0 5px 0 5px;
+main h2 {
+  margin: 10px 0 10px 0;
+}
+
+.messages-container {
+  padding: 10px;
+}
+
+.message strong {
+  font-size: 1.2rem;
+}
+
+.message p {
+  margin: 0 0 5px 0;
+}
+
+.message strong,
+.message p,
+.message .bottomMessageDiv {
+  padding: 0 10px 0 5px;
+  overflow-wrap: break-word;
 }
 
 .topMessageDiv {
@@ -115,7 +136,7 @@ ul > li > div {
 .delete-icon {
   width: 30px;
   height: 30px;
-  fill: white;
+  fill: var(--text-dark);
   border: 2px solid transparent;
   transition:
     fill 0.3s,

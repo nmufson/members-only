@@ -41,7 +41,7 @@ const messageValidationRules = () => [
     .notEmpty()
     .withMessage('Message cannot be empty')
     .isLength({ max: 250 })
-    .withMessage('Message cannot be longer than 500 characters'),
+    .withMessage('Message cannot be longer than 250 characters'),
 ];
 
 const getError = (errors, field) => {

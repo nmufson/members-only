@@ -1,20 +1,18 @@
-export function openModal() {
-  document.getElementById('logOutModal').classList.add('show');
-  document.getElementById('modalBackdrop').classList.add('show');
+export function showLogOutModal() {
+  document.getElementById('logOutModal').style.display = 'block';
+  document.getElementById('modalBackdrop').style.display = 'block';
 }
 
 export function closeModal() {
-  const deleteModal = document.getElementById('deleteMessageModal');
-  document.getElementById('logOutModal').classList.remove('show');
-  deleteModal.style.display = 'none';
-  document.getElementById('modalBackdrop').classList.remove('show');
+  document.getElementById('logOutModal').style.display = 'none';
+  document.getElementById('deleteMessageModal').style.display = 'none';
+  document.getElementById('modalBackdrop').style.display = 'none';
 }
 
-export function showDeleteModal(messageId) {
-  const deleteModal = document.getElementById('deleteMessageModal');
+export function showDeleteMessageModal(messageId) {
   const messageIdInput = document.getElementById('messageIdInput');
   messageIdInput.value = messageId;
 
-  deleteModal.style.display = 'block';
-  document.getElementById('modalBackdrop').classList.add('show');
+  document.getElementById('deleteMessageModal').style.display = 'block';
+  document.getElementById('modalBackdrop').style.display = 'block';
 }
