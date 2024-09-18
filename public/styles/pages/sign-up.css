@@ -1,3 +1,18 @@
+#sign-up-form {
+  width: clamp(270px, 70%, 600px);
+  align-self: center;
+  margin: 10px 0 0 0;
+  min-height: 200px;
+}
+
+#sign-up-form legend {
+  padding: 10px 0 0 0;
+}
+
+#sign-up-form fieldset {
+  margin: 0;
+}
+
 #sign-up-form div {
   margin: 5px 5px 15px 5px;
   display: flex;
@@ -5,5 +20,9 @@
 }
 
 #sign-up-form input {
-  margin: 6px 0 0 0;
+  margin: 5px 0 0 0;
+}
+
+#sign-up-form button {
+  margin: 0 0 0 5px;
 }

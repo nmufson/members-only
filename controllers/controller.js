@@ -16,8 +16,6 @@ async function getHomePage(req, res) {
 async function getSignUpPage(req, res) {
   res.render('sign-up', {
     title: 'Sign Up Page',
-    errors: [],
-    data: {},
     getError: getError,
   });
 }
@@ -27,9 +25,7 @@ async function getMemberJoinPage(req, res) {
 }
 
 async function getLogInPage(req, res) {
-  const messages = req.session.messages || [];
-  const email = req.query.email || '';
-  res.render('log-in', { title: 'Log In Page', messages, email });
+  res.render('log-in', { title: 'Log In Page', getError });
 }
 
 async function postLogIn(req, res, next) {
@@ -41,10 +37,12 @@ async function postLogIn(req, res, next) {
     if (!user) {
       // Authentication failed
       // Store the error message in the session (can pull from session in ejs)
-      req.session.messages = [info.message];
-      return res.redirect(
-        '/log-in?email=' + encodeURIComponent(req.body.email)
-      );
+      req.session.logInErrors = {
+        email: info.message.includes('email') ? info.message : '',
+        password: info.message.includes('password') ? info.message : '',
+      };
+      req.session.logInEmail = req.body.email;
+      return res.redirect('/log-in');
     }
 
     // If authentication is successful, log in the user
@@ -69,12 +67,9 @@ async function postCreateUser(req, res, next) {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.render('sign-up', {
-      title: 'Sign Up Page',
-      errors: errors.array(),
-      data: req.body, // retains user data
-      getError: getError,
-    });
+    req.session.signUpErrors = errors.array();
+    req.session.signUpData = req.body;
+    return res.redirect('/sign-up');
   }
 
   const { firstName, lastName, email, password, adminCode } = req.body;

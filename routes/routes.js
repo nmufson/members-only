@@ -3,17 +3,30 @@ const router = Router();
 const controller = require('../controllers/controller');
 const checkAuthenticated = require('../middleware/checkAuthenticated.js');
 const checkAdmin = require('../middleware/checkAdmin.js');
-const { setLocalsMessages } = require('../middleware/setLocalsMiddleware');
+const {
+  setLocalsMessages,
+  setLocalsSignUpForm,
+  setLocalsLogInForm,
+} = require('../middleware/setLocalsMiddleware');
 const {
   userValidationRules,
   messageValidationRules,
 } = require('../utils/validators');
+const { setLocalsFormData } = require('../middleware/setLocalsMiddleware');
+const clearSessionData = require('../middleware/clearSessionData.js');
 
-router.get('/', setLocalsMessages, controller.getHomePage);
-router.get('/sign-up', controller.getSignUpPage);
+router.get('/', clearSessionData, setLocalsMessages, controller.getHomePage);
+
+router.get(
+  '/sign-up',
+  clearSessionData,
+  setLocalsSignUpForm,
+  controller.getSignUpPage
+);
 router.post(
   '/sign-up',
   userValidationRules(),
+  clearSessionData,
   setLocalsMessages,
   controller.postCreateUser
 );
@@ -21,8 +34,18 @@ router.post(
 router.get('/member-join', controller.getMemberJoinPage);
 router.post('/member-join', checkAuthenticated, controller.postJoinClub);
 
-router.get('/log-in', controller.getLogInPage);
-router.post('/log-in', setLocalsMessages, controller.postLogIn);
+router.get(
+  '/log-in',
+  clearSessionData,
+  setLocalsLogInForm,
+  controller.getLogInPage
+);
+router.post(
+  '/log-in',
+  clearSessionData,
+  setLocalsMessages,
+  controller.postLogIn
+);
 
 router.post(
   '/log-out',

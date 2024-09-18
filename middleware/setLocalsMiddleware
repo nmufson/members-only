@@ -19,10 +19,35 @@ async function setLocalsMessages(req, res, next) {
   next();
 }
 
-async function setLocalsFormErrors(req, res, next) {
-  res.locals.formErrors = req.session.formErrors || [];
-  req.session.formErrors = []; // Reset formErrors after passing them to locals
+// async function setLocalsFormErrors(req, res, next) {
+//   res.locals.formErrors = req.session.formErrors || [];
+//   // req.session.formErrors = []; // Reset formErrors after passing them to locals
+//   next();
+// }
+
+// function setLocalsFormData(req, res, next) {
+//   res.locals.formData = req.session.formData || {}; // Default to an empty object if none exists
+//   // req.session.formData = {}; // Clear session formData after it's passed to locals
+//   next();
+// }
+
+function setLocalsSignUpForm(req, res, next) {
+  res.locals.signUpErrors = req.session.signUpErrors || [];
+  res.locals.signUpData = req.session.signUpData || {};
+
   next();
 }
 
-module.exports = { setLocalsUser, setLocalsMessages, setLocalsFormErrors };
+function setLocalsLogInForm(req, res, next) {
+  res.locals.logInErrors = req.session.logInErrors || [];
+  res.locals.logInEmail = req.session.logInEmail || '';
+
+  next();
+}
+
+module.exports = {
+  setLocalsUser,
+  setLocalsMessages,
+  setLocalsSignUpForm,
+  setLocalsLogInForm,
+};

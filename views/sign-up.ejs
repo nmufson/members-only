@@ -1,79 +1,91 @@
-<div>
-  <form action="/sign-up" id="sign-up-form" method="POST">
-    <fieldset>
-      <legend>Register</legend>
+<form action="/sign-up" id="sign-up-form" method="POST">
+  <fieldset>
+    <legend>Register</legend>
 
-      <div>
-        <label for="firstName">First Name:</label>
-        <input
-          type="text"
-          id="firstName"
-          name="firstName"
-          value="<%= data ? data.firstName : '' %>"
-          required
-        />
-        <% if (errors && getError(errors, 'firstName')) { %>
-        <div class="error"><p><%= getError(errors, 'firstName') %></p></div>
-        <% } %>
+    <!-- First Name Input -->
+    <div>
+      <label for="firstName">First Name:</label>
+      <% if (signUpErrors && getError(signUpErrors, 'firstName')) { %>
+      <div class="error">
+        <p><%= getError(signUpErrors, 'firstName') %></p>
       </div>
+      <% } %>
+      <input
+        type="text"
+        id="firstName"
+        name="firstName"
+        value="<%= signUpData ? signUpData.firstName : '' %>"
+        required
+      />
+    </div>
 
-      <div>
-        <label for="lastName">Last Name:</label>
-        <input
-          type="text"
-          id="lastName"
-          name="lastName"
-          value="<%= data ? data.lastName : '' %>"
-          required
-        />
-        <% if (errors && getError(errors, 'lastName')) { %>
-        <div class="error"><p><%= getError(errors, 'lastName') %></p></div>
-        <% } %>
+    <!-- Last Name Input -->
+    <div>
+      <label for="lastName">Last Name:</label>
+      <% if (signUpErrors && getError(signUpErrors, 'lastName')) { %>
+      <div class="error">
+        <p><%= getError(signUpErrors, 'lastName') %></p>
       </div>
+      <% } %>
+      <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        value="<%= signUpData ? signUpData.lastName : '' %>"
+        required
+      />
+    </div>
 
-      <div>
-        <label for="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value="<%= data ? data.email : '' %>"
-          required
-        />
-        <% if (errors && getError(errors, 'email')) { %>
-        <div class="error"><p><%= getError(errors, 'email') %></p></div>
-        <% } %>
+    <!-- Email Input -->
+    <div>
+      <label for="email">Email:</label>
+      <% if (signUpErrors && getError(signUpErrors, 'email')) { %>
+      <div class="error">
+        <p><%= getError(signUpErrors, 'email') %></p>
       </div>
+      <% } %>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value="<%= signUpData ? signUpData.email : '' %>"
+        required
+      />
+    </div>
 
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
-        <% if (errors && getError(errors, 'password')) { %>
-        <div class="error"><p><%= getError(errors, 'password') %></p></div>
-        <% } %>
+    <!-- Password Input -->
+    <div>
+      <label for="password">Password:</label>
+      <% if (signUpErrors && getError(signUpErrors, 'password')) { %>
+      <div class="error">
+        <p><%= getError(signUpErrors, 'password') %></p>
       </div>
+      <% } %>
+      <input type="password" id="password" name="password" required />
+    </div>
 
-      <div>
-        <label for="confirmPassword">Confirm Password:</label>
-        <input
-          type="password"
-          id="confirmPassword"
-          name="confirmPassword"
-          required
-        />
-        <% if (errors && getError(errors, 'confirmPassword')) { %>
-        <div class="error">
-          <p><%= getError(errors, 'confirmPassword') %></p>
-        </div>
-        <% } %>
+    <!-- Confirm Password Input -->
+    <div>
+      <label for="confirmPassword">Confirm Password:</label>
+      <% if (signUpErrors && getError(signUpErrors, 'confirmPassword')) { %>
+      <div class="error">
+        <p><%= getError(signUpErrors, 'confirmPassword') %></p>
       </div>
+      <% } %>
+      <input
+        type="password"
+        id="confirmPassword"
+        name="confirmPassword"
+        required
+      />
+    </div>
 
-      <div>
-        <label for="adminCode">Admin Code (Optional):</label>
-        <input type="password" id="adminCode" name="adminCode" />
-      </div>
+    <!-- Admin Code Input -->
+    <div>
+      <label for="adminCode">Admin Code (Optional):</label>
+      <input type="password" id="adminCode" name="adminCode" />
+    </div>
 
-      <button type="submit">Submit</button>
-    </fieldset>
-  </form>
-</div>
+    <button type="submit">Submit</button>
+  </fieldset>
+</form>

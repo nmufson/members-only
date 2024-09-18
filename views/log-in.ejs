@@ -1,32 +1,40 @@
-<div>
-  <% if (messages && messages.length > 0) { %>
-  <div class="alert alert-danger">
-    <% messages.forEach(function(message) { %>
-    <p><%= message %></p>
-    <% }); %>
-  </div>
-  <% } %>
-  <form action="/log-in" id="log-in-form" method="POST">
-    <fieldset>
-      <legend>Log In</legend>
-
-      <div>
-        <label for="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value="<%= email %>"
-          required
-        />
-      </div>
-
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
-      </div>
-
-      <button type="submit">Submit</button>
-    </fieldset>
-  </form>
+<% if (logInErrors && logInErrors.length > 0) { %>
+<div class="error">
+  <% logInErrors.forEach(function(formError) { %>
+  <p><%= formError %></p>
+  <% }); %>
 </div>
+<% } %>
+<form action="/log-in" id="log-in-form" method="POST">
+  <fieldset>
+    <legend>Log In</legend>
+
+    <div>
+      <label for="email">Email:</label>
+      <% if (logInErrors.email) { %>
+      <div class="error">
+        <p><%= logInErrors.email %></p>
+      </div>
+      <% } %>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        value="<%= logInEmail ? logInEmail : '' %>"
+        required
+      />
+    </div>
+
+    <div>
+      <label for="password">Password:</label>
+      <% if (logInErrors.password) { %>
+      <div class="error">
+        <p><%= logInErrors.password %></p>
+      </div>
+      <% } %>
+      <input type="password" id="password" name="password" required />
+    </div>
+
+    <button type="submit">Submit</button>
+  </fieldset>
+</form>

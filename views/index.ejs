@@ -1,10 +1,4 @@
-<div
-  id="create-message-btn-div"
-  style="
-    <%=(formErrors && formErrors.length > 0)? 'display: none;' : 'display: block;'
-      %>;
-  "
->
+<div id="create-message-btn-div">
   <% if (user) { %>
   <button id="create-message-btn">Create Message</button>
   <% } else { %>
@@ -12,33 +6,17 @@
   <% } %>
 </div>
 
-<div
-  id="send-message-form-container"
-  style="
-    <%=(formErrors && formErrors.length > 0)? 'display: block;' : 'display: none;'
-      %>;
-  "
->
+<div id="send-message-form-container">
   <form action="/send-message" id="send-message-form" method="POST">
     <fieldset>
       <legend>Send New Message</legend>
-
-      <!-- Display form validation errors if any -->
-      <% if (formErrors && formErrors.length > 0) { %>
-      <div class="error">
-        <ul>
-          <% formErrors.forEach(function(error) { %>
-          <li><%= error.msg %></li>
-          <% }); %>
-        </ul>
-      </div>
-      <% } %>
 
       <!-- Message input field -->
       <textarea
         name="message"
         placeholder="Write your message here..."
         maxlength="250"
+        required
       ></textarea>
 
       <div class="form-actions">

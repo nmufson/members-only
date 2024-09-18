@@ -2,9 +2,11 @@
 #send-message-form-container {
   margin: 10px 0 0 0;
   align-self: center;
+  text-align: center;
 }
 
 #send-message-form-container {
+  display: none;
   position: relative; /* So the overlay is contained within the form */
   width: clamp(300px, 70%, 600px);
   border-radius: 8px;
@@ -113,7 +115,7 @@ ul > li > div {
 
 .message.basic strong,
 .message.basic small:nth-child(2) {
-  filter: blur(3px);
+  filter: blur(5px);
 }
 
 .other > div {
