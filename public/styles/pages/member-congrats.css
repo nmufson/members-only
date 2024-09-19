@@ -1,0 +1,13 @@
+#memberCongratsDiv {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e1e8ed;
+  border: 3px solid var(--border-color);
+  width: clamp(270px, 70%, 600px);
+  align-self: center;
+}
+
+#memberCongratsDiv a.button {
+  margin: 0 0 10px 0;
+}

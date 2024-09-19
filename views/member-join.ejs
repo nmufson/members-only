@@ -1,17 +1,20 @@
-<div>
-  <form action="/member-join" method="POST">
-    <fieldset>
-      <legend>Join the Club as a Member!</legend>
+<form action="/member-join" id="memberJoinForm" method="POST">
+  <fieldset>
+    <legend>Join the Club as a Member!</legend>
 
+    <div>
       <label for="memberPassword">Enter the Secret Passcode:</label>
+      <% if (passcodeError) { %>
+      <p class="error"><%= passcodeError %></p>
+      <% } %>
       <input
         type="password"
         id="memberPassword"
         name="memberPassword"
         required
       />
+    </div>
 
-      <button type="submit">Submit</button>
-    </fieldset>
-  </form>
-</div>
+    <button type="submit">Submit</button>
+  </fieldset>
+</form>

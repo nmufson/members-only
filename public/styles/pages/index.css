@@ -1,38 +1,18 @@
-#create-message-btn-div,
-#send-message-form-container {
+#createMessageBtnDiv {
   margin: 10px 0 0 0;
   align-self: center;
   text-align: center;
 }
 
-#send-message-form-container {
+#sendMessageForm {
   display: none;
-  position: relative; /* So the overlay is contained within the form */
-  width: clamp(300px, 70%, 600px);
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for a clean look */
-  background-color: #fff; /* Neutral background */
 }
 
-#send-message-form {
-  border-radius: 8px;
-  padding: 10px 0 0 0;
-}
-
-fieldset > div:nth-child(2) {
-  margin: 0 0 10px 0;
-}
-
-fieldset {
+#sendMessageForm fieldset {
+  display: flex;
+  flex-direction: column;
   border: none;
   border-radius: 6px;
-  margin: 0 0 20px 0;
-}
-
-/* Legend styling */
-legend {
-  font-size: 1.4rem;
-  font-weight: bold;
 }
 
 /* Textarea styling */
@@ -49,27 +29,23 @@ textarea {
   transition: border-color 0.2s ease-in-out; /* Smooth interaction on focus */
 }
 
-textarea:focus {
-  outline: none;
-  border-color: #999; /* Highlight on focus */
+.message-feedback {
+  color: var(--text-dark);
+  align-self: end;
+  margin: 5px 5px 0 0;
+  height: 19.2px;
 }
 
-.form-actions {
+#messageFormActions {
   display: flex;
   margin: 5px 0 0 0;
 }
 
-.form-actions button {
+#messageFormActions button {
   margin: 0 10px 0 0;
 }
 
-/* Disabled button styling */
-main button[disabled] {
-  cursor: not-allowed;
-  background-color: #ccc;
-}
-
-main h2 {
+.messages-container h2 {
   margin: 10px 0 10px 0;
 }
 
@@ -96,18 +72,18 @@ main h2 {
   display: flex;
 }
 
-ul {
+.messages-container ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
 
-li {
-  margin: 0 0 10px 0;
+.messages-container li {
+  margin-bottom: 10px;
   width: clamp(250px, 70%, 400px);
 }
 
-ul > li > div {
+.messages-container ul > li > div {
   border-radius: 10px; /* Rounder message bubble */
   padding: 5px;
   border: var(--accent-light-gray) 3px solid;

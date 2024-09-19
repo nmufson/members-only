@@ -1,31 +1,30 @@
-<div id="create-message-btn-div">
+<div id="createMessageBtnDiv">
   <% if (user) { %>
-  <button id="create-message-btn">Create Message</button>
+  <button id="createMessageBtn">Create Message</button>
   <% } else { %>
-  <h2 class="log-in-alert-header">Log In to Send Messages</h2>
+  <h2 id="logInAlertHeader">Log In to Send Messages</h2>
   <% } %>
 </div>
 
-<div id="send-message-form-container">
-  <form action="/send-message" id="send-message-form" method="POST">
-    <fieldset>
-      <legend>Send New Message</legend>
+<form action="/send-message" id="sendMessageForm" method="POST" novalidate>
+  <fieldset>
+    <legend>Send New Message</legend>
 
-      <!-- Message input field -->
-      <textarea
-        name="message"
-        placeholder="Write your message here..."
-        maxlength="250"
-        required
-      ></textarea>
+    <!-- Message input field -->
 
-      <div class="form-actions">
-        <button id="close-form-btn" type="button">Close</button>
-        <button type="submit">Submit</button>
-      </div>
-    </fieldset>
-  </form>
-</div>
+    <textarea
+      name="message"
+      placeholder="Write your message here..."
+      maxlength="250"
+      required
+    ></textarea>
+
+    <div id="messageFormActions">
+      <button id="closeFormBtn" type="button">Close</button>
+      <button type="submit">Submit</button>
+    </div>
+  </fieldset>
+</form>
 
 <div class="messages-container">
   <h2>Messages</h2>
@@ -73,3 +72,4 @@
     </ul>
   </div>
 </div>
+<script src="/scripts/index.js" type="module"></script>

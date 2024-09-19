@@ -1,0 +1,16 @@
+#memberJoinForm {
+  width: clamp(270px, 70%, 600px);
+  align-self: center;
+  margin: 10px 0 0 0;
+  max-height: 200px;
+}
+
+#memberJoinForm div {
+  margin: 5px 5px 15px 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+#memberJoinForm button {
+  margin: 0 0 0 5px;
+}

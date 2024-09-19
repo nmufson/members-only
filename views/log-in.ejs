@@ -1,21 +1,10 @@
-<% if (logInErrors && logInErrors.length > 0) { %>
-<div class="error">
-  <% logInErrors.forEach(function(formError) { %>
-  <p><%= formError %></p>
-  <% }); %>
-</div>
-<% } %>
-<form action="/log-in" id="log-in-form" method="POST">
+<form action="/log-in" id="logInForm" method="POST" novalidate>
   <fieldset>
     <legend>Log In</legend>
 
     <div>
       <label for="email">Email:</label>
-      <% if (logInErrors.email) { %>
-      <div class="error">
-        <p><%= logInErrors.email %></p>
-      </div>
-      <% } %>
+
       <input
         type="email"
         id="email"
@@ -23,16 +12,14 @@
         value="<%= logInEmail ? logInEmail : '' %>"
         required
       />
+      <p class="error"><%= logInErrors.email %></p>
     </div>
 
     <div>
       <label for="password">Password:</label>
-      <% if (logInErrors.password) { %>
-      <div class="error">
-        <p><%= logInErrors.password %></p>
-      </div>
-      <% } %>
+
       <input type="password" id="password" name="password" required />
+      <p class="error"><%= logInErrors.password %></p>
     </div>
 
     <button type="submit">Submit</button>

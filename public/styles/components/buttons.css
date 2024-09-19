@@ -1,0 +1,36 @@
+button,
+a.button {
+  background-color: var(--button-background);
+  color: var(--button-text);
+  text-wrap: nowrap;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  text-decoration: none; /* Remove underline from links */
+  border: 1px solid black;
+  border-radius: 5px;
+  cursor: pointer; /* Make cursor pointer to indicate interaction */
+  text-align: center; /* Center text */
+  line-height: 1.5; /* Adjust line-height for vertical centering */
+  font-weight: bold; /* Remove any default bold text in buttons */
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease; /* Smooth transition for hover effect */
+  appearance: none; /* Remove default browser styles */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+button:hover,
+a.button:hover {
+  background-color: var(--button-background-hover);
+}
+
+button:active,
+a.button:active {
+  background-color: var(--button-background-active);
+}
+
+button[disabled] {
+  cursor: not-allowed;
+  background-color: #ccc;
+}

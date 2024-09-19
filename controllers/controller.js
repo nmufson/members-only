@@ -1,12 +1,8 @@
 const db = require('../db/queries');
 const bcrypt = require('bcryptjs');
 const catchAsync = require('../utils/catchAsync');
-const {
-  userValidationRules,
-  messageValidationRules,
-  getError,
-} = require('../utils/validators');
-const { body, validationResult } = require('express-validator');
+const { userValidationRules, getError } = require('../utils/validators');
+const { validationResult } = require('express-validator');
 const passport = require('passport');
 
 async function getHomePage(req, res) {
@@ -20,8 +16,20 @@ async function getSignUpPage(req, res) {
   });
 }
 
+async function checkEmail(req, res) {
+  const { email } = req.body;
+
+  const user = await db.getUserByEmail(email);
+
+  if (user) {
+    return res.json({ exists: true });
+  } else {
+    return res.json({ exists: false });
+  }
+}
+
 async function getMemberJoinPage(req, res) {
-  res.render('member-join', { title: 'Join as Member' });
+  res.render('member-join', { title: 'Join as Member', passcodeError: '' });
 }
 
 async function getLogInPage(req, res) {
@@ -102,7 +110,10 @@ async function postJoinClub(req, res) {
     // show their name somewhere in the corner with an indication that
     // they are a member
   } else {
-    res.status(403).send('Incorrect member password'); // Handle incorrect member password
+    res.render('member-join', {
+      title: 'Member Join',
+      passcodeError: 'Incorrect passcode',
+    });
   }
 }
 
@@ -150,4 +161,5 @@ module.exports = {
   postLogIn: catchAsync(postLogIn),
   sendMessage: catchAsync(sendMessage),
   deleteMessage: catchAsync(deleteMessage),
+  checkEmail: catchAsync(checkEmail),
 };

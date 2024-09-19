@@ -1,15 +1,11 @@
-<form action="/sign-up" id="sign-up-form" method="POST">
+<form action="/sign-up" id="signUpForm" method="POST" novalidate>
   <fieldset>
     <legend>Register</legend>
 
     <!-- First Name Input -->
     <div>
       <label for="firstName">First Name:</label>
-      <% if (signUpErrors && getError(signUpErrors, 'firstName')) { %>
-      <div class="error">
-        <p><%= getError(signUpErrors, 'firstName') %></p>
-      </div>
-      <% } %>
+      <p id="firstNameFeedback" class="error"></p>
       <input
         type="text"
         id="firstName"
@@ -22,11 +18,7 @@
     <!-- Last Name Input -->
     <div>
       <label for="lastName">Last Name:</label>
-      <% if (signUpErrors && getError(signUpErrors, 'lastName')) { %>
-      <div class="error">
-        <p><%= getError(signUpErrors, 'lastName') %></p>
-      </div>
-      <% } %>
+      <p id="lastNameFeedback" class="error"></p>
       <input
         type="text"
         id="lastName"
@@ -39,11 +31,9 @@
     <!-- Email Input -->
     <div>
       <label for="email">Email:</label>
-      <% if (signUpErrors && getError(signUpErrors, 'email')) { %>
-      <div class="error">
-        <p><%= getError(signUpErrors, 'email') %></p>
-      </div>
-      <% } %>
+      <p id="emailFeedback" class="error">
+        <%= signUpErrors[0] ? signUpErrors[0].msg : '' %>
+      </p>
       <input
         type="email"
         id="email"
@@ -56,22 +46,14 @@
     <!-- Password Input -->
     <div>
       <label for="password">Password:</label>
-      <% if (signUpErrors && getError(signUpErrors, 'password')) { %>
-      <div class="error">
-        <p><%= getError(signUpErrors, 'password') %></p>
-      </div>
-      <% } %>
+      <p id="passwordFeedback" class="error"></p>
       <input type="password" id="password" name="password" required />
     </div>
 
     <!-- Confirm Password Input -->
     <div>
       <label for="confirmPassword">Confirm Password:</label>
-      <% if (signUpErrors && getError(signUpErrors, 'confirmPassword')) { %>
-      <div class="error">
-        <p><%= getError(signUpErrors, 'confirmPassword') %></p>
-      </div>
-      <% } %>
+      <p id="confirmPasswordFeedback" class="error"></p>
       <input
         type="password"
         id="confirmPassword"
@@ -86,6 +68,8 @@
       <input type="password" id="adminCode" name="adminCode" />
     </div>
 
-    <button type="submit">Submit</button>
+    <button type="submit" disabled="true">Submit</button>
   </fieldset>
 </form>
+
+<script src="/scripts/signUpForm.js" type="module"></script>
