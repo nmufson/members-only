@@ -3,6 +3,8 @@
 config/*.json
 package-lock.json
 package.json
+db/populatedb.js
+
 
 # Ignore node_modules directory
 node_modules/

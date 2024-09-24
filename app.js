@@ -88,8 +88,6 @@ passport.use(
 
 app.use(setLocalsMiddleware.setLocalsUser);
 
-// app.use(logSessionMiddleware);
-
 // static files, parsing
 app.use(express.static('public'));
 
