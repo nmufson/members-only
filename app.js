@@ -24,6 +24,10 @@ const sessionStore = new pgSession({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+const isSecure =
+  process.env.NODE_ENV === 'production' ||
+  process.env.RAILWAY_STATIC_URL?.startsWith('https://');
+
 app.use(
   //config object for the express-session middleware
   session({
@@ -33,9 +37,18 @@ app.use(
     resave: false,
     saveUninitialized: false,
     // set to true for production (for using HTTPS)
-    cookie: { secure: process.env.NODE_ENV === 'production' }, // Set to true if using HTTPS
+    cookie: {
+      secure: isSecure, // This will be true if using HTTPS
+      sameSite: isSecure ? 'none' : 'lax',
+      maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      httpOnly: true, // Prevents client-side JS from reading the cookie
+    },
   })
 );
+
+if (isSecure) {
+  app.set('trust proxy', 1);
+}
 
 app.use(passport.initialize());
 app.use(passport.session());
