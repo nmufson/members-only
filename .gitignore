@@ -1,8 +1,5 @@
 # Ignore environment files
 .env
-config/*.json
-package-lock.json
-package.json
 db/populatedb.js
 
 
