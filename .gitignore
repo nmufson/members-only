@@ -1,6 +1,5 @@
 # Ignore environment files
 .env
-db/populatedb.js
 
 
 # Ignore node_modules directory
