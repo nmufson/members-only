@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const submitButton = form.querySelector('button[type="submit"]');
   const formActionsDiv = form.querySelector('#messageFormActions');
   const feedback = document.createElement('p');
+  const rootStyles = getComputedStyle(document.documentElement);
   feedback.className = 'message-feedback';
   textarea.parentElement.insertBefore(feedback, formActionsDiv);
   submitButton.disabled = true;
@@ -38,12 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
   textarea.addEventListener('input', () => {
     const maxLength = 250;
     const currentLength = textarea.value.length;
-
+    console.log(currentLength);
     if (currentLength === 0) {
       feedback.textContent = `Message cannot be empty.`;
       feedback.style.color = 'red';
       submitButton.disabled = true; // Disable the submit button if empty
     } else {
+      console.log('yo');
       feedback.textContent = `${currentLength}/${maxLength} characters`;
       const textColor = rootStyles.getPropertyValue('--text-color').trim();
       feedback.style.color = textColor;
