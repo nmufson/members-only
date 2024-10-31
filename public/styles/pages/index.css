@@ -92,6 +92,7 @@ textarea {
 .message.basic strong,
 .message.basic small:nth-child(2) {
   filter: blur(5px);
+  user-select: none;
 }
 
 .other > div {

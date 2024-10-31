@@ -80,14 +80,12 @@ passport.use(
     async (email, password, done) => {
       try {
         const user = await db.getUserByEmail(email);
-        console.log('Retrieved user:', user); // Debug statement
+
         if (!user) return done(null, false, { message: 'Incorrect email.' });
 
-        console.log(password, user.password);
         // user.password is the hashed pw
         const isPasswordValid = await bcrypt.compare(password, user.password);
-        console.log(isPasswordValid);
-        console.log('Password match result:', isPasswordValid); // Debug statement
+
         if (!isPasswordValid)
           return done(null, false, { message: 'Incorrect password.' });
 

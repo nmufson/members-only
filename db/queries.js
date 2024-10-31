@@ -58,7 +58,6 @@ async function newMessage(userId, message) {
   });
 }
 
-// caching messages? so that it only has to query new ones?
 async function getAllMessages() {
   const query = `
     SELECT messages.id AS message_id, message_content, user_id, timestamp, users.first_name, users.last_name
@@ -69,7 +68,7 @@ async function getAllMessages() {
 
   return catchQuery(async () => {
     const result = await pool.query(query);
-    // console.log('Messages retrieved successfully:', result.rows);
+    console.log('Messages retrieved successfully:', result.rows);
     return result.rows;
   });
 }

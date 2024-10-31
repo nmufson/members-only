@@ -1,3 +1,5 @@
+// update some of these to router.put and router.delete
+
 const { Router } = require('express');
 const router = Router();
 const controller = require('../controllers/controller');

@@ -1,3 +1,5 @@
+import { showDeleteMessageModal } from './modal.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('sendMessageForm');
   const closeFormButton = document.getElementById('closeFormBtn');
@@ -22,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
   deleteMessageIcons.forEach((icon) => {
     icon.addEventListener('click', () => {
       const messageId = icon.id;
-      console.log('type ish');
       showDeleteMessageModal(messageId);
     });
   });
@@ -39,13 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
   textarea.addEventListener('input', () => {
     const maxLength = 250;
     const currentLength = textarea.value.length;
-    console.log(currentLength);
+
     if (currentLength === 0) {
       feedback.textContent = `Message cannot be empty.`;
       feedback.style.color = 'red';
       submitButton.disabled = true; // Disable the submit button if empty
     } else {
-      console.log('yo');
       feedback.textContent = `${currentLength}/${maxLength} characters`;
       const textColor = rootStyles.getPropertyValue('--text-color').trim();
       feedback.style.color = textColor;

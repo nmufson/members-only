@@ -10,8 +10,6 @@
   <fieldset>
     <legend>Send New Message</legend>
 
-    <!-- Message input field -->
-
     <textarea
       name="message"
       placeholder="Write your message here..."
@@ -38,9 +36,14 @@
         <div>
           <div class="topMessageDiv">
             <div>
-              <strong
-                ><%= message.first_name %> <%= message.last_name %></strong
-              >
+              <strong>
+                <% if (!user) { %>
+                <!-- perhaps create random text function  -->
+                Random Text for Guests <% } else if (message.user_id !== user.id
+                && !user.membership_status) { %> Random Text for Non-Members <%
+                } else { %> <%= message.first_name %> <%= message.last_name %>
+                <% } %>
+              </strong>
             </div>
             <div class="deleteMessageDiv">
               <svg
@@ -48,7 +51,7 @@
                 viewBox="0 0 24 24"
                 class="delete-icon"
                 id="<%= message.message_id %>"
-                style="display: <%= !user || !user.is_admin ? 'none' : 'block' %>;"
+                style="display: <%= (!user || (!user.is_admin && user.id !== message.user_id)) ? 'none' : 'block' %>;"
               >
                 <title>delete</title>
                 <path
