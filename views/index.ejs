@@ -37,12 +37,10 @@
           <div class="topMessageDiv">
             <div>
               <strong>
-                <% if (!user) { %>
-                <!-- perhaps create random text function  -->
-                Random Text for Guests <% } else if (message.user_id !== user.id
-                && !user.membership_status) { %> Random Text for Non-Members <%
-                } else { %> <%= message.first_name %> <%= message.last_name %>
-                <% } %>
+                <% if (!user) { %> Must be Member to View <% } else if
+                (message.user_id !== user.id && !user.membership_status) { %>
+                Must be Member to View <% } else { %> <%= message.first_name %>
+                <%= message.last_name %> <% } %>
               </strong>
             </div>
             <div class="deleteMessageDiv">
@@ -64,8 +62,11 @@
           <div class="bottomMessageDiv">
             <small>Sent:</small>
             <small>
-              <%= message.formattedTime %> - <%= message.formattedDate %></small
-            >
+              <% if (!user) { %> Must be Member to View <% } else if
+              (message.user_id !== user.id && !user.membership_status) { %> Must
+              be Member to View <% } else { %> <%= message.formattedTime %> -
+              <%= message.formattedDate %> <% } %>
+            </small>
           </div>
         </div>
       </li>
