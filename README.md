@@ -1,6 +1,10 @@
 ## Overview
 
-**Members Only** is a messaging app that allows users to create an account, send messages, and view messages posted by other users. However, to see the usernames and timestamps associated with messages, users must be members of the site, which requires entering a special passcode. This app was developed as a portfolio project to demonstrate skills in user authentication and database management.
+**Members Only** is a messaging app that allows users to create an account, send messages, and view messages posted by other users. To see the usernames and timestamps associated with other users messages, users must be members of the site which requires entering a special passcode. This app was developed as a portfolio project to demonstrate skills in user authentication and database management.
+
+## Live Demo
+
+https://members-only-production-c726.up.railway.app/
 
 ## Tech Stack
 
@@ -12,29 +16,39 @@ The app is built with the following technologies:
 - **Passport.js**: Authentication middleware for handling user logins.
 - **bcrypt.js**: For password hashing to securely store user credentials.
 - **express-session**: For managing user sessions.
-- **connect-pg-simple**: For storing sessions in the PostgreSQL database.
 - **EJS (Embedded JavaScript Templates)**: Templating engine for rendering dynamic HTML.
 
 ## Features
 
+- **Home Page**: View user messages, but unable to see names or timestamps until signed in as a member.
+  
+![Home Page with user messages](./assets/home-page.png)
+
+*Home Page with user messages*
+
 - **User Authentication**: Secure login using email and password with hashed credentials.
 - **Password Protection**: Passwords are hashed using bcrypt.js before being stored.
+
+![Sign Up Page](./assets/sign-up.png)
+
+*Sign Up Page*
+
 - **Message Posting**: Users can post and view messages.
+
+![New Message](./assets/new-message.png)
+
+*New Message*
+
+![User Message Sent](./assets/user-message.png)
+
+*User Message Sent*
+
 - **User Roles**:
     - **Regular Users**: Can see messages but not usernames or message timestamp unless they become members.
     - **Members**: Can view messages with usernames and timestamp visible by entering a special passcode.
     - **Admins**: Can remove messages from other users. 
 - **Stored User Profiles**: User information and roles are stored in the PostgreSQL database.
 
-## Live Demo
-
-The app is deployed and available for viewing at: https://members-only-production-c726.up.railway.app/
-
-### How to Use the App
-
-1. **Sign Up**: Create a new account using your email and password, with option to enter Admin passcode for higher credentials. 
-2. **Post Messages**: Send messages to other users from the home page.
-3. **Become a Member**: Enter the special passcode to become a member and see both usernames and timestamps associated with messages.
 
 ## Authentication and Authorization
 
@@ -101,7 +115,7 @@ The app is deployed and available for viewing at: https://members-only-productio
 - **Input Validation Errors**:
     - Perform client-side validation to ensure all required fields and constraints are met before sending data to the server. Provide immediate feedback to users to correct any issues before submission.
 - **Server Response Handling**:
-    - Handle and display server responses and errors on the client side. Ensure that users receive appropriate messages based on the server’s response, and take necessary actions to address any issues.
+    - Handle and display server responses and errors on the client side. Ensure that users receive appropriate messages based on the server’s response.
   
 ## Contact Information
 
