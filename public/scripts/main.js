@@ -21,5 +21,3 @@ document.addEventListener('DOMContentLoaded', () => {
     .querySelector('#modalBackdrop')
     .addEventListener('click', closeModal);
 });
-
-// put this in the validators util?

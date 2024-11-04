@@ -37,10 +37,9 @@ async function getLogInPage(req, res) {
 }
 
 async function postLogIn(req, res, next) {
-  // Use Passport's local strategy to authenticate the user
   passport.authenticate('local', async (err, user, info) => {
     if (err) {
-      return next(err); // If there's an error, pass it to the error handler
+      return next(err); // pass error to error handler
     }
     if (!user) {
       // Authentication failed
@@ -53,21 +52,16 @@ async function postLogIn(req, res, next) {
       return res.redirect('/log-in');
     }
 
-    // If authentication is successful, log in the user
     req.logIn(user, (err) => {
       if (err) {
         return next(err);
       }
       return res.redirect('/');
     });
-
-    // Redirect to the home page or the user's dashboard after successful login
-  })(req, res, next); // Pass req, res, and next to passport.authenticate
+  })(req, res, next);
 }
 
 async function postCreateUser(req, res, next) {
-  // promise.all waits for validation to complete, validation.run returns promise
-  // that resolves once validation is done
   await Promise.all(
     userValidationRules().map((validation) => validation.run(req))
   );
@@ -88,13 +82,12 @@ async function postCreateUser(req, res, next) {
   const user = await db.getUserByEmail(email);
   if (!user) return res.status(500).send('Error: User could not be created');
 
-  // Wrap req.login in a Promise so it can be used with async/await
   await new Promise((resolve, reject) => {
     req.login(user, (err) => {
       if (err) {
-        return reject(err); // Pass any errors to the catchAsync utility
+        return reject(err);
       }
-      resolve(); // Successfully logged in
+      resolve();
     });
   });
 
@@ -105,10 +98,6 @@ async function postJoinClub(req, res) {
   if (req.body.memberPassword === process.env.MEMBER_PASSWORD) {
     await db.makeMember(req.user.id);
     res.render('member-congrats', { title: 'Member Congrats' });
-    // render a page or modal saying 'ur now a member'
-    // then allow the user to return to home page
-    // show their name somewhere in the corner with an indication that
-    // they are a member
   } else {
     res.render('member-join', {
       title: 'Member Join',
@@ -121,9 +110,9 @@ async function logOut(req, res) {
   await new Promise((resolve, reject) => {
     req.logout((err) => {
       if (err) {
-        return reject(err); // Reject the promise if an error occurs
+        return reject(err);
       }
-      resolve(); // Resolve the promise if logout is successful
+      resolve();
     });
   });
 

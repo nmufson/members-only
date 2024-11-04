@@ -53,11 +53,6 @@ router.post(
   setLocalsMessages
 );
 
-router.post(
-  '/delete-message',
-  checkAdmin,
-  controller.deleteMessage,
-  setLocalsMessages
-);
+router.post('/delete-message', controller.deleteMessage, setLocalsMessages);
 
 module.exports = router;

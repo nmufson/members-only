@@ -44,12 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (currentLength === 0) {
       feedback.textContent = `Message cannot be empty.`;
       feedback.style.color = 'red';
-      submitButton.disabled = true; // Disable the submit button if empty
+      submitButton.disabled = true;
     } else {
       feedback.textContent = `${currentLength}/${maxLength} characters`;
       const textColor = rootStyles.getPropertyValue('--text-color').trim();
       feedback.style.color = textColor;
-      submitButton.disabled = false; // Enable the submit button when valid
+      submitButton.disabled = false;
     }
   });
 });

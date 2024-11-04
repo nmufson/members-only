@@ -95,6 +95,12 @@ textarea {
   user-select: none;
 }
 
+.message.basic.self strong,
+.message.basic.self small:nth-child(2) {
+  filter: blur(0);
+  user-select: auto;
+}
+
 .other > div {
   background-color: var(--other-message);
 }
