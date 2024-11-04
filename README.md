@@ -105,4 +105,4 @@ The app is deployed and available for viewing at: https://members-only-productio
   
 ## Contact Information
 
-For questions, suggestions, or feedback, please contact Nick Mufson at nickmufson1@gmail.com.
+For questions, suggestions, or feedback, please contact me at nickmufson1@gmail.com.
