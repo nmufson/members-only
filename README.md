@@ -2,10 +2,6 @@
 
 **Members Only** is a messaging app that allows users to create an account, send messages, and view messages posted by other users. To see the usernames and timestamps associated with other users messages, users must be members of the site which requires entering a special passcode. This app was developed as a portfolio project to demonstrate skills in user authentication and database management.
 
-## Live Demo
-
-https://members-only-production-c726.up.railway.app/
-
 ## Tech Stack
 
 The app is built with the following technologies:
